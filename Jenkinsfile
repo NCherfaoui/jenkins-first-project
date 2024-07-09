@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+      agent { dockerfile true }
+    }
 
     environment {
         // Référence à l'ID des credentials via une variable d'environnement
@@ -7,7 +9,35 @@ pipeline {
          DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
     }
 
-     stages {
+    stages {
+
+        stage('Checkout') {
+            steps {
+                // Utilisation de la variable d'environnement pour les credentials
+                git branch: 'main', credentialsId: "${env.GIT_CREDENTIALS_ID}", url: 'https://github.com/NCherfaoui/jenkins-first-project.git'
+
+    }
+        stage('Prepare') {
+            steps {
+                // Rendre le script Maven Wrapper exécutable
+                sh 'chmod a+x ./mvnw'
+                sh 'docker --version'
+                sh 'docker-compose --version'
+                sh 'maven --version'
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+    /* stages {
         stage('Checkout') {
             steps {
                 // Utilisation de la variable d'environnement pour les credentials
@@ -63,7 +93,7 @@ pipeline {
                     }
                 }
             }
-}
+}*/
     post {
         success {
             echo 'Pipeline succeeded!'
