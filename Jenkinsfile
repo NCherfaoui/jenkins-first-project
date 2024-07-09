@@ -1,10 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.1-openjdk-17'
-    
-        }
+    agent any // Utiliser l'agent Jenkins principal au lieu d'un conteneur Docker spécifique
+
+    tools {
+        maven 'Maven-3.9.8' 
+        jdk 'JDK 17' 
     }
+
     stages {
         stage('Checkout') {
             steps {
