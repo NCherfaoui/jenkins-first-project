@@ -22,12 +22,12 @@ To get a local copy up and running, follow these simple steps:
 
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/NCherfaoui/projet-prepa-competences.git
+   git clone https://github.com/NCherfaoui/jenkins-first-project.git
    ```
 
 2. **Navigate to the project directory**
    ```sh
-   cd projet-prepa-competences
+   cd jenkins-first-project
    ```
 
 3. **Build the project**
