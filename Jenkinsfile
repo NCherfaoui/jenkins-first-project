@@ -4,9 +4,10 @@ pipeline {
     environment {
         // Référence à l'ID des credentials via une variable d'environnement
         GIT_CREDENTIALS_ID = credentials('GIT_CREDENTIALS_ID')
+         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
     }
 
-    stages {
+    /* stages {
         stage('Checkout') {
             steps {
                 // Utilisation de la variable d'environnement pour les credentials
@@ -41,7 +42,27 @@ pipeline {
                 sh './mvnw package'
             }
         }
-    }
+    } */
+        stage('Build Docker Image') {
+                steps {
+                    script {
+                        // Construire l'image Docker
+                        docker.build("monapp:${env.BUILD_ID}")
+                    }
+                }
+            }
+
+            stage('Push Docker Image') {
+                steps {
+                    script {
+                        // Se connecter à Docker Hub
+                        docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS}") {
+                            // Pousser l'image Docker
+                            docker.image("monapp:${env.BUILD_ID}").push()
+                        }
+                    }
+                }
+            }
 
     post {
         success {
