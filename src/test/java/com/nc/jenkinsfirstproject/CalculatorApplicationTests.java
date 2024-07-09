@@ -1,4 +1,4 @@
-package org.example.calculator;
+package com.nc.jenkinsfirstproject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package org.example.calculator;
+package com.nc.jenkinsfirstproject;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package org.example.calculator;
+package com.nc.jenkinsfirstproject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
