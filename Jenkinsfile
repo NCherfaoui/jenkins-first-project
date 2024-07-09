@@ -1,11 +1,23 @@
 pipeline {
     agent any
 
+    environment {
+        // Référence à l'ID des credentials via une variable d'environnement
+        GIT_CREDENTIALS_ID = credentials('GIT_CREDENTIALS_ID')
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the code from the repository
-                git 'https://github.com/NCherfaoui/jenkins-first-project.git'
+                // Utilisation de la variable d'environnement pour les credentials
+                git branch: 'main', credentialsId: "${env.GIT_CREDENTIALS_ID}", url: 'https://github.com/NCherfaoui/jenkins-first-project.git'
+            }
+        }
+
+        stage('Prepare') {
+            steps {
+                // Rendre le script Maven Wrapper exécutable
+                sh 'chmod a+x ./mvnw'
             }
         }
 
@@ -29,7 +41,6 @@ pipeline {
                 sh './mvnw package'
             }
         }
-
     }
 
     post {
