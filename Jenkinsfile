@@ -1,5 +1,8 @@
 pipeline {
-    agent any // Utiliser l'agent Jenkins principal au lieu d'un conteneur Docker spécifique
+    agent any
+    environment { 
+	    DOCKER_USERNAME =  'ncherfaoui' 
+	    GITHUB_REPO_URL =  'https://github.com/NCherfaoui/jenkins-first-project.git'  }
 
     tools {
         maven 'Maven-3.9.8' 
@@ -8,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/NCherfaoui/jenkins-first-project.git'
+                git branch: 'main', url: "${env.GITHUB_REPO_URL}"
             }
         }
         
@@ -27,7 +30,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("ncherfaoui/calculatrice:${env.BUILD_NUMBER}", '.')
+                    docker.build("${env.DOCKER_USERNAME}/calculatrice:${env.BUILD_NUMBER}", '.')
                 }
             }
         }
@@ -36,7 +39,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.image("ncherfaoui/calculatrice:${env.BUILD_NUMBER}").push()
+                        docker.image("${env.DOCKER_USERNAME}/calculatrice:${env.BUILD_NUMBER}").push()
                     }
                 }
             }
