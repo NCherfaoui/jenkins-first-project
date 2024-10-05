@@ -14,14 +14,14 @@ services:
     networks:
       - jenkins-network
 
-  deployment-target:
-    image: docker:dind
-    privileged: true
-    restart: always
-    ports:
-      - "8081:8080" 
-    networks:
-      - jenkins-network
+  # deployment-target:
+  #   image: docker:dind
+  #   privileged: true
+  #   restart: always
+  #   ports:
+  #     - "8081:8080" 
+  #   networks:
+  #     - jenkins-network
 
 networks:
   jenkins-network:
