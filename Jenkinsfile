@@ -1,11 +1,11 @@
 pipeline {
     agent any
     
-    environment { 
-        DOCKER_USERNAME = 'ncherfaoui' 
-        GITHUB_TOKEN = credentials('github-token')
-        GITHUB_REPO_URL = 'https://github.com/NCherfaoui/jenkins-first-project.git'
-    }
+    // environment { 
+    //     DOCKER_USERNAME = 'ncherfaoui' 
+    //     GITHUB_TOKEN = credentials('github-token')
+    //     GITHUB_REPO_URL = 'https://github.com/NCherfaoui/jenkins-first-project.git'
+    // }
 
     tools {
         maven 'Maven-3.9.8' 
