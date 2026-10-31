@@ -1,6 +1,6 @@
 # Utiliser l'image de base OpenJDK 11
 #FROM openjdk:11-jre-slim
-FROM bellsoft/liberica-runtime-container:jre-21.0.4_9-slim-musl
+FROM bellsoft/liberica-runtime-container:jre-21.0.13.0.3-slim-musl
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
